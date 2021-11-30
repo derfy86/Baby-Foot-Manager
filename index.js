@@ -13,7 +13,7 @@ const app = express();
 app.use(express.static('assets'));
 
 /*
- * To access in api
+ * To access an api
  */
 app.use('/api', router);
 
