@@ -7,21 +7,52 @@
     <title>Baby Derfy Manager</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <!-- script JS -->
     <script src="./js/index.js"></script>
 </head>
 <body>
-    <h1>Baby Derfy Manager</h1>
-    <header>
-
-    </header>
-    <main>
-
-    </main>
-    <footer>
-        <div>
+    <div class="container--block">
+        <header class="container--nav">
+            <img class="logo" src="./pictures/logo.png" alt="logo acceuil">
+        </header>
+        <main class="container--lists">
+            <h1 class="title--app">Welcome to Baby Derfy Manager</h1>
+            <div class="lists">
+                <!-- lists -->
+            </div>
+            <template id="template-play">
+            <!-- play -->
+                <div class="container--play" play_id="">
+                    <div class="time">
+                    <!-- datetime -->
+                    </div>
+                    <div class="container--play--teams">
+                        <div class="team_A">
+                        <!-- name team_A -->
+                        </div>
+                        <div class="score_A">
+                        <!-- score team_A -->
+                        </div>
+                        <p class="vs">
+                            VS
+                        </p>
+                        <div class="score_B">
+                        <!-- score team_B -->
+                        </div>
+                        <div class="team_B">
+                            <!-- name team_B -->
+                        </div>
+                    </div>
+                </div>
+            <!--/ play -->
+            </template>
+        </main>
+    </div>
+    <footer class="footer">
             <p>Mentions légale</p>
-        </div>
     </footer>
 </body>
 </html>
