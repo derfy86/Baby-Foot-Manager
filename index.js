@@ -2,13 +2,16 @@
  * Require
  */
 const express = require('express');
-const cors = require('cors');
 require('dotenv').config();
+const multer = require ('multer') 
 
 const PORT = process.env.PORT || 3000;
 const router = require('./app/router');
 
 const app = express();
+
+const bodyParser = multer();
+app.use(bodyParser.none());
 
 app.use(express.static('assets'));
 

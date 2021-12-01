@@ -17,12 +17,10 @@
     <div class="container--block">
         <header class="container--nav">
             <img class="logo" src="./pictures/logo.png" alt="Logo welcome">
-            <button class="nav--btn">
+            <button class="nav--btn" id="add--play">
                 <img class="add--play--btn" src="./pictures/plus.png" alt="add a game">
             </button>
-            <button class="nav--btn">
-                <img class="add--play--btn" src="./pictures/plus.png" alt="add a game">
-            </button>
+        
         </header>
         <main class="container--lists">
             <h1 class="title--app">Welcome to Baby Derfy Manager</h1>
@@ -63,6 +61,36 @@
                 </div>
             <!--/ play -->
             </template>
+
+            <div class="modal none" id="addPlayModal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <form action="" method="POST">
+                        <div class="modal-card-head modal-color">
+                            <p class="modal-card-title">Add a game</p>
+                            <button class="delete close" type="button" aria-label="close"></button>
+                        </div>
+                        <section class="modal-card-body modal-color">
+                            <div class="field">
+                                <label for="team_A" class="label">Name player A</label>
+                                <div class="control">
+                                    <input type="text" class="input" id="team_A" name="team_A" value="" placeholder="Player name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="team_B" class="label">Name player B</label>
+                                <div class="control">
+                                    <input type="text" class="input" id="team_B" name="team_B" value="" placeholder="Player name">
+                                </div>
+                            </div>
+                        </section>
+                        <div class="modal-card-foot modal-color">
+                            <button type="submit" class="button is-success">Let's go!</button>
+                            <button class="button close" type="button">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </main>
     </div>
     <footer class="footer">

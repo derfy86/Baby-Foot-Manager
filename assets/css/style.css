@@ -129,6 +129,14 @@ body {
     cursor: pointer;
 }
 
+.active {
+    display: hidden;
+}
+
+.none {
+    display: none;
+}
+
 .footer {
     width: 100%;
     text-align: center;

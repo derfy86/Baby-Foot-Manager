@@ -11,11 +11,26 @@ const app = {
     },
 
     addListenerToActions: function () {
+        const addPlay = document.getElementById('add--play');
+        addPlay.addEventListener('click', function(){
+            app.showAddPlayModal()
+        });
+
+        const closeModalButtons = document.querySelectorAll('.close');
+        for (const button of closeModalButtons) {
+          button.addEventListener('click', app.hideModals);
+        };
+
+        const addListForm = document.querySelector('#addPlayModal form');
+        addListForm.addEventListener('submit', async function(event){
+        event.preventDefault();
+        await app.addPlayForm(event);
+        app.hideModals();
+        });
     },
 
     getPlayFromAPI: async function () {
         try {
-
             const response = await fetch(app.base_url + '/api/');
 
             if (response.status !== 200) {
@@ -24,9 +39,8 @@ const app = {
             }
 
             const lists = await response.json();
-            console.log(`lists`, lists)
             for (const list of lists) {
-                app.makeListInDOM(list);
+                app.makePlayInDOM(list);
                 }
 
         } catch (error) {
@@ -34,8 +48,45 @@ const app = {
             console.error(error);
         }
     },
+    
+    showAddPlayModal: function () {
+        const addPlayModal = document.getElementById('addPlayModal');
+        addPlayModal.classList.remove('none');
+        addPlayModal.classList.add('active');
+    },
 
-    makeListInDOM: function (list) {
+    
+    addPlayForm: async function (event) {
+        try {
+            const formData = new FormData(event.target);
+        
+            const response = await fetch(app.base_url + '/api/add', {
+                method: 'post',
+                body: formData,
+            });
+        
+            if (response.status !== 200) {
+                throw list;
+            }
+
+            const list = await response.json();
+    
+            app.makePlayInDOM(list[0]);
+        } catch (error) {
+          alert(app.defaultErrorMessage);
+          console.error(error);
+        }
+    },
+
+    hideModals: function () {
+        const modals = document.querySelectorAll('.modal');
+        for (const modal of modals) {
+          modal.classList.remove('active');
+          modal.classList.add('none');
+        }
+    },
+
+    makePlayInDOM: function (list) {
         const playTemplate = document.getElementById('template-play');
         const playTemplateContent = playTemplate.content;
         const newPlay = document.importNode(playTemplateContent, true);

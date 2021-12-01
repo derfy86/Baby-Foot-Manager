@@ -9,6 +9,14 @@ const dataMapper = {
         client.query(query, callback);
     },
 
+    createPlay: function (form, callback) {
+        const query = {
+        text: `INSERT INTO "play" ("team_A", "team_B") VALUES ($1, $2) RETURNING *`,
+        values: [form.team_A, form.team_B]
+        };
+        client.query(query, callback);
+    },
+
     deletePlay: function (id, callback) {
         const query = {
         text: `DELETE FROM "play" WHERE "id"=$1`,
