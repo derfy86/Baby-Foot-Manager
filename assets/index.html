@@ -130,5 +130,24 @@
     <footer class="footer">
             <p>Mentions légale</p>
     </footer>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+    const socket = io();
+    socket.on('connect', () => {
+    console.log('connect');
+    });
+
+    //send
+    // let counter = 0;
+    // setInterval(() => {
+    // ++counter;
+    // socket.emit('hey', { counter }); 
+    // }, 1000);
+
+    //listen
+    // socket.on('hello', (counter) => {
+    // console.log(`hello - ${counter}`);
+    // });
+    </script>
 </body>
 </html>

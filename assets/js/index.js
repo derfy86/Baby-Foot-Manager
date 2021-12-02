@@ -208,7 +208,6 @@ const app = {
                     currentPlay = play;
                 }
             }
-            console.log(`currentPlay`, currentPlay)
             currentPlay.remove();
         
             const response = await fetch(app.base_url + '/api/finish', {
