@@ -62,6 +62,7 @@
             <!--/ play -->
             </template>
 
+            <!-- add play modal -->
             <div class="modal none" id="addPlayModal">
                 <div class="modal-background"></div>
                 <div class="modal-card">
@@ -91,6 +92,39 @@
                     </form>
                 </div>
             </div>
+            <!-- /add play modal -->
+
+            <!-- finish play modal -->
+            <div class="modal none" id="finishPlayModal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <form action="" method="PATCH" play_id="">
+                        <div class="modal-card-head modal-color">
+                            <p class="modal-card-title">finish a game</p>
+                            <button class="delete close" type="button" aria-label="close"></button>
+                        </div>
+                        <section class="modal-card-body modal-color">
+                            <div class="field">
+                                <label for="score_A" class="label">Score player A</label>
+                                <div class="control">
+                                    <input type="number" class="input-score" id="score_A" name="score_A" value="" placeholder="Score player A">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="score_B" class="label">Score player A</label>
+                                <div class="control">
+                                    <input type="number" class="input-score" id="score_B" name="score_B" value="" placeholder="Score player B">
+                                </div>
+                            </div>
+                        </section>
+                        <div class="modal-card-foot modal-color">
+                            <button type="submit" class="button is-success">End play</button>
+                            <button class="button close" type="button">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- /finish play modal -->
         </main>
     </div>
     <footer class="footer">

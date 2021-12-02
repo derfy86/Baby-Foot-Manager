@@ -73,8 +73,7 @@ body {
 
 .container--play--teams {
     display: flex;
-    /* background: linear-gradient(0.25turn, #00b600, #ebf8e1, #c50000); */
-    background-color: rgb(131, 117, 255);
+    background: linear-gradient(0.25turn, rgb(131, 117, 255), #ebf8e1, rgb(131, 117, 255));
     color: white;
     margin: 1rem 2rem 1rem 1rem;
     padding: 1rem;
@@ -82,7 +81,6 @@ body {
     border-radius: 50px;
     font-weight: bold;
     width: 65%;
-    /* background-color:rgb(134, 134, 134) */
 }
 
 .time {

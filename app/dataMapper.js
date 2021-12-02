@@ -17,9 +17,17 @@ const dataMapper = {
         client.query(query, callback);
     },
 
+    endPlay: function (form, callback) {
+        const query = {
+        text: `UPDATE "play" SET "status" = $1, "score_A" = $2, "score_B" = $3 WHERE "id" = $4 RETURNING *`,
+        values: [true, form.score_A, form.score_B, form.id]
+        };
+        client.query(query, callback);
+    },
+
     deletePlay: function (id, callback) {
         const query = {
-        text: `DELETE FROM "play" WHERE "id"=$1`,
+        text: `DELETE FROM "play" WHERE "id" = $1`,
         values: [id]
         };
         client.query(query, callback);

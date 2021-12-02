@@ -7,6 +7,8 @@ router.get('/', mainController.homePage);
 
 router.post('/add', mainController.addPlay);
 
+router.patch('/finish', mainController.finishPlay);
+
 router.delete('/delete/:id', mainController.deletePlay);
 
 module.exports = router;
