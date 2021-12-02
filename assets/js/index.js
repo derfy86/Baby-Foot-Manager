@@ -3,8 +3,24 @@ const app = {
     base_url: 'http://localhost:3000',
     defaultErrorMessage: 'Désolé un problème est survenu, veuillez réessayer ultérieurement',
 
+
     init: function () {
     console.log('app.init !');
+    const socket = io();
+
+    socket.on('connect', () => {
+        console.log('connect');
+    });
+    
+    socket.on("data", (message) => {
+        //destroy all the plays and rebuild
+        console.log(message);
+        const allPlay = document.querySelectorAll('.container--play');
+        for (const play of allPlay){
+            play.remove();
+        }
+        app.getPlayFromAPI();
+    });
 
     app.addListenerToActions();
     app.getPlayFromAPI();
@@ -85,7 +101,8 @@ const app = {
             }
 
             const list = await response.json();
-    
+            const socket = io();
+            socket.emit('data', 'change in database'); 
             app.makePlayInDOM(list[0]);
         } catch (error) {
           alert(app.defaultErrorMessage);
@@ -184,6 +201,8 @@ const app = {
             });
         
             currentPlay.remove();
+            const socket = io();
+            socket.emit('data', 'change in database'); 
             
             if (response.status !== 200) {
                 throw app.defaultErrorMessage;
@@ -221,6 +240,9 @@ const app = {
 
             const list = await response.json();
             app.makePlayInDOM(list[0])
+
+            const socket = io();
+            socket.emit('data', 'change in database'); 
             
         } catch (error) {
             alert(app.defaultErrorMessage);

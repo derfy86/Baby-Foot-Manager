@@ -31,7 +31,11 @@ io.on('connection', (socket) => {
       message.id = ++id;
       io.emit('send_message', message);
   });
+  socket.on('data', (message) => {
+    io.emit('data', message);
 });
+});
+
 
 //listen
 // io.on('connection', socket => {
@@ -51,3 +55,5 @@ app.use('/api', router);
 server.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
 });
+
+// exports.emit = emit;

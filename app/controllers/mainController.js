@@ -1,4 +1,5 @@
 const dataMapper = require('../dataMapper.js');
+const index = require('../../index.js');
 
 const mainController = {
 
@@ -57,6 +58,7 @@ const mainController = {
                     next();
                     return;
                 }
+                // index.emit();
                 return res.status(200).json(results.rows)
             });
         } catch(error) {
