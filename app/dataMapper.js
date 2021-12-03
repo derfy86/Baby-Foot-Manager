@@ -4,7 +4,7 @@ const dataMapper = {
 
     getAllPlay: function (callback) {
         const query = {
-        text: `SELECT * FROM "play"`
+        text: `SELECT *, (SELECT COUNT(*) FROM "play") as "count_all", (SELECT COUNT(*) FROM "play" WHERE "status"=true) as count_finish, (SELECT COUNT(*) FROM "play" WHERE "status"=false) as count_progress FROM "play" ORDER BY "status"=true; `
         };
         client.query(query, callback);
     },

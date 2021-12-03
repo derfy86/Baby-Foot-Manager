@@ -2,28 +2,29 @@ const app = {
 
     base_url: 'http://localhost:3000',
     defaultErrorMessage: 'Désolé un problème est survenu, veuillez réessayer ultérieurement',
+    filter: 'all',
 
 
     init: function () {
-    console.log('app.init !');
-    const socket = io();
+        console.log('app.init !');
+        const socket = io();
 
-    socket.on('connect', () => {
-        console.log('connect');
-    });
-    
-    socket.on("data", (message) => {
-        //destroy all the plays and rebuild
-        console.log(message);
-        const allPlay = document.querySelectorAll('.container--play');
-        for (const play of allPlay){
-            play.remove();
-        }
+        socket.on('connect', () => {
+            console.log('connect');
+        });
+        
+        socket.on("data", (message) => {
+            //destroy all the plays and rebuild
+            console.log(message);
+            const allPlay = document.querySelectorAll('.container--play');
+            for (const play of allPlay){
+                play.remove();
+            }
+            app.getPlayFromAPI();
+        });
+
+        app.addListenerToActions();
         app.getPlayFromAPI();
-    });
-
-    app.addListenerToActions();
-    app.getPlayFromAPI();
     },
 
     addListenerToActions: function () {
@@ -37,28 +38,67 @@ const app = {
           button.addEventListener('click', app.hideModals);
         };
 
+        const allButton = document.getElementById('check--all--play');
+        allButton.addEventListener('click', app.filterByAll);
+
+        const progressButton = document.getElementById('check--progress--play');
+        progressButton.addEventListener('click', app.filterByProgress);
+
+        const finishButton = document.getElementById('check--finish--play');
+        finishButton.addEventListener('click', app.filterByFinish);
+
         const playForm = document.querySelector('#addPlayModal form');
         const inputs = document.querySelectorAll('.input');
         playForm.addEventListener('submit', async function(event){
-        event.preventDefault();
-        await app.addPlayForm(event);
-        for (const input of inputs) {
-            input.value = "";
-        }
-        app.hideModals();
+            event.preventDefault();
+            await app.addPlayForm(event);
+            for (const input of inputs) {
+                input.value = "";
+            }
+            app.hideModals();
         });
 
         const finishForm = document.querySelector('#finishPlayModal form');
         const inputScore = document.querySelectorAll('.input-score');
         finishForm.addEventListener('submit', async function(event){
-        event.preventDefault();
-        const id = finishForm.getAttribute('play_id')
-        await app.finishPlay(event, id);
-        for (const input of inputScore) {
-            input.value = "";
-        }
-        app.hideModals();
+            event.preventDefault();
+            const id = finishForm.getAttribute('play_id')
+            await app.finishPlay(event, id);
+            for (const input of inputScore) {
+                input.value = "";
+            }
+            app.hideModals();
         });
+    },
+
+    filterByAll: function () {
+        app.filter = 'all'
+        const allPlays = document.querySelectorAll('.container--play');
+        for (const play of allPlays) {
+            play.remove();
+        }
+        const socket = io();
+        socket.emit('data', 'change in database'); 
+    },
+
+    filterByProgress: function () {
+        app.filter = 'progress'
+        const allPlays = document.querySelectorAll('.container--play');
+        for (const play of allPlays) {
+            play.remove();
+        }
+        const socket = io();
+        socket.emit('data', 'change in database'); 
+    },
+
+    filterByFinish: function () {
+        app.filter = 'finish'
+        const allPlays = document.querySelectorAll('.container--play');
+        for (const play of allPlays) {
+            play.remove();
+        }
+        const socket = io();
+        socket.emit('data', 'change in database'); 
     },
 
     getPlayFromAPI: async function () {
@@ -73,7 +113,18 @@ const app = {
             const lists = await response.json();
             for (const list of lists) {
                 app.makePlayInDOM(list);
-                }
+            }
+
+            const counterAllPlay = lists[lists.length -1].count_all;
+            const counterFinishPlay = lists[lists.length -1].count_finish;
+            const counterProgressPlay = lists[lists.length -1].count_progress;
+
+            const allPlayNumber = document.getElementById('check--all--play');
+            allPlayNumber.textContent = counterAllPlay
+            const finishPlayNumber = document.getElementById('check--finish--play');
+            finishPlayNumber.textContent = counterFinishPlay
+            const progressPlayNumber = document.getElementById('check--progress--play');
+            progressPlayNumber.textContent = counterProgressPlay
 
         } catch (error) {
             alert(app.defaultErrorMessage);
@@ -119,12 +170,16 @@ const app = {
     },
 
     makePlayInDOM: function (list) {
+        console.log(app.filter)
         const playTemplate = document.getElementById('template-play');
         const playTemplateContent = playTemplate.content;
         const newPlay = document.importNode(playTemplateContent, true);
 
         const playId = newPlay.querySelector('[play_id]');
         playId.setAttribute('play_id', list.id)
+
+        const status = newPlay.querySelector('[status]');
+        status.setAttribute('status', list.status)
    
         const separateDateAndHour = list.created_at.split('T');
         const rawDate = separateDateAndHour[0].split('-');
@@ -179,7 +234,14 @@ const app = {
             app.showfinishPlayModal(list.id)
         });
         
-        playContainer.append(newPlay);
+        if(app.filter === 'progress' && list.status === true){
+            console.log('progress')
+        } else if(app.filter === 'finish' && list.status === false) {
+            console.log('finish')
+        } else {
+            playContainer.append(newPlay);
+        }
+
         
     },
 

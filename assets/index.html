@@ -17,10 +17,30 @@
     <div class="container--block">
         <header class="container--nav">
             <img class="logo" src="./pictures/logo.png" alt="Logo welcome">
-            <button class="nav--btn" id="add--play">
-                <img class="add--play--btn" src="./pictures/plus.png" alt="add a game">
-            </button>
-        
+            <section class="nav bottom">
+                <button class="nav--add--btn" id="add--play">
+                    <img class="add--play--btn" src="./pictures/plus.png" alt="add a game">
+                </button>
+                <p class="nav--btn--text" id="">Add a new game</p>
+            </section>
+            <section class="nav">
+                <button class="nav--btn" id="check--all--play">
+                    0
+                </button>
+                <p class="nav--btn--text" id="">View all games</p>
+            </section>
+            <section class="nav">
+                <button class="nav--btn incomplete" id="check--progress--play">
+                    0
+                </button>
+                <p class="nav--btn--text" id="">View incomplete games</p>
+            </section>
+            <section class="nav">
+                <button class="nav--btn complete" id="check--finish--play">
+                    0
+                </button>
+                <p class="nav--btn--text" id="">View complete games</p>
+            </section>
         </header>
         <main class="container--lists">
             <h1 class="title--app">Welcome to Baby Derfy Manager</h1>
@@ -29,7 +49,7 @@
             </div>
             <template id="template-play">
             <!-- play -->
-                <div class="container--play" play_id="">
+                <div class="container--play" play_id="" status="">
                     <div class="time">
                     <!-- datetime -->
                     </div>

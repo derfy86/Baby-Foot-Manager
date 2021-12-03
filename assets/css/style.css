@@ -23,17 +23,47 @@ body {
 .container--nav {
     min-height: 97vh;
     background-color: black;
-    width: 10%;
+    /* width: 10%; */
+    width: 200px;
+    color: white;
+    text-align: center;
+}
+
+.nav {
     display: flex;
     flex-direction: column;
-    align-items: center
+    align-items: center;
+    border-bottom: solid 1px grey;
+    padding-bottom: 1rem;
+    margin: 0 0.8rem 0 
+}
+
+.bottom {
+    margin-bottom: 2rem;
+}
+
+.nav--add--btn {
+    background-color: black;  border: none;
+    margin: 3rem 0 0.5rem 0;
+    cursor: pointer;
 }
 
 .nav--btn {
-    background-color: black;
-    border: none;
-    margin-top: 2rem;
+    margin: 3rem 0 0.5rem 0;
+    padding: 1rem 1.3rem;
     cursor: pointer;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.nav--btn:hover {
+    border: solid 4px white;
+    border-radius: 50%
+}
+
+.nav--btn--text {
+    text-align: center;
 }
 
 .add--play--btn {
@@ -43,6 +73,16 @@ body {
 .add--play--btn:hover {
     border: solid 4px white;
     border-radius: 50%
+}
+
+.complete {
+    background-color: rgb(0, 207, 0);
+    color: black;
+}
+
+.incomplete {
+    background-color: rgb(233, 13, 13);
+    color: black;
 }
 
 .container--lists {
