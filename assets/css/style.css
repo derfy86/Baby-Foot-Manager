@@ -101,10 +101,9 @@ body {
 
 .container--chat {
     border-radius: 50px;
-    width: 25%;
+    width: 20%;
     border: 4px solid  rgb(96, 184, 255);
     background-color:rgb(196, 196, 196);
-    min-height: 78vh;
     text-align: center;
     padding: 1rem;
     display: flex;
@@ -112,16 +111,64 @@ body {
     margin-bottom: 1rem ;
 }
 
+.container--chat--message {
+    background-color: white;
+    min-height: 55vh;
+    border-radius: 10px;
+    margin: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat--pseudo {
+    margin: 0.5rem 0.5rem 0 0.5rem;
+    font-size: 0.7em;
+}
+
+.chat--message {
+    margin: 0 0.5rem 0 0.5rem;
+}
+
+.align--left {
+    align-self: flex-start;
+}
+
+.container--chat--input {
+    display: flex;
+}
+
+.validate--btn--chat {
+    width: 10%;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    background-color:rgb(196, 196, 196);
+}
+
+.add--chat--btn {
+    width: 100%;
+}
+
+.add--chat--btn:hover {
+    border: solid 4px white;
+    border-radius: 50%
+}
+
 .title--chat {
     font-weight: bold;
     font-size: 1.3em;
+}
+
+.nickname--text {
+    font-size: 1.2em;
+    margin-top: 1rem;
 }
 
 .lists {
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
-    width: 70%;
+    width: 75%;
 }
 
 /* this is the template */

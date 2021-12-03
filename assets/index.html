@@ -51,7 +51,18 @@
                 <div class="container--chat">
                     <p class="title--chat">Online chat!</p>
                     <div class="container--chat--pseudo">
-                        X
+                        <p class="nickname--text">Nickname :</p>
+                        <input type="text" class="input" id="nickname" name="nickname" value="" placeholder="Your nickname">
+                        <div class="container--chat--message">
+                            <p class="chat--pseudo align--left">pseudo</p>
+                            <p class="chat--message align--left">message</p>
+                        </div>
+                        <form class="container--chat--input" action="" method="POST">
+                            <input type="text-area" class="input" id="text_chat" name="message" value="" placeholder="Your message">
+                            <button type="submit" class="validate--btn--chat">
+                                <img class="add--chat--btn" src="./pictures/checked.png" alt="finish a game">
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -79,10 +90,10 @@
                                 <!-- name team_B -->
                             </div>
                         </div>
-                        <button class="remove--btn">
+                        <button type="button" class="remove--btn">
                             <img class="add--play--btn" src="./pictures/remove.png" alt="delete a game">
                         </button>
-                        <button class="validate--btn">
+                        <button type="button" class="validate--btn">
                             <img class="add--play--btn" src="./pictures/checked.png" alt="finish a game">
                         </button>
                     </div>
