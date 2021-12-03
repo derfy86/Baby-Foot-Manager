@@ -133,6 +133,10 @@ body {
     align-self: flex-start;
 }
 
+.align--right {
+    align-self: flex-end;
+}
+
 .container--chat--input {
     display: flex;
 }

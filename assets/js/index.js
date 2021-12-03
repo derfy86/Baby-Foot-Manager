@@ -10,17 +10,21 @@ const app = {
         const socket = io();
 
         socket.on('connect', () => {
+            // init socket
             console.log('connect');
         });
         
         socket.on("data", (message) => {
             //destroy all the plays and rebuild
-            console.log(message);
             const allPlay = document.querySelectorAll('.container--play');
             for (const play of allPlay){
                 play.remove();
             }
             app.getPlayFromAPI();
+        });
+
+        socket.on("send_message", (message) => {
+            app.buildMessage(message)
         });
 
         app.addListenerToActions();
@@ -69,6 +73,16 @@ const app = {
             }
             app.hideModals();
         });
+
+        const chatForm = document.querySelector('.container--chat--input');
+        const inputChatForm = document.getElementById('text_chat');
+        chatForm.addEventListener('submit', async function(event){
+            event.preventDefault();
+            if(inputChatForm.value !== "") {
+                app.sendMessageForm(inputChatForm.value);
+                inputChatForm.value = "";
+            }
+        })
     },
 
     filterByAll: function () {
@@ -155,6 +169,45 @@ const app = {
             const socket = io();
             socket.emit('data', 'change in database'); 
             app.makePlayInDOM(list[0]);
+        } catch (error) {
+          alert(app.defaultErrorMessage);
+          console.error(error);
+        }
+    },
+
+    sendMessageForm: async function (inputMessage) {
+        try {
+            const nicknameElement = document.getElementById('nickname');
+            let nickname = nicknameElement.value;
+            if(nickname === "") {
+                nickname = "Anonymous"
+            };
+            const socket = io();
+            socket.emit('send_message', {nickname, inputMessage}); 
+
+        } catch (error) {
+          alert(app.defaultErrorMessage);
+          console.error(error);
+        }
+    },
+
+    buildMessage: async function (message) {
+        try {
+
+            const nicknameElement = document.getElementById('nickname');
+
+            const myNickname = document.createElement("p");
+            myNickname.textContent = message.nickname;
+            nicknameElement.value === message.nickname ? myNickname.classList.add('align--left', 'chat--pseudo') : myNickname.classList.add('align--right', 'chat--pseudo');
+
+            const showMyMessage = document.createElement("p");
+            showMyMessage.textContent = message.inputMessage;
+            nicknameElement.value === message.nickname ? showMyMessage.classList.add('align--left', 'chat--message') : showMyMessage.classList.add('align--right', 'chat--message');
+
+            const container = document.querySelector('.container--chat--message');
+            container.append(myNickname);
+            container.append(showMyMessage);
+
         } catch (error) {
           alert(app.defaultErrorMessage);
           console.error(error);
