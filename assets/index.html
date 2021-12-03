@@ -7,11 +7,190 @@
     <title>Baby Derfy Manager</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <!-- script JS -->
     <script src="./js/index.js"></script>
 </head>
 <body>
-    <h1>Baby Derfy Manager</h1>
+    <div class="container--block">
+        <header class="container--nav">
+            <img class="logo" src="./pictures/logo.png" alt="Logo welcome">
+            <section class="nav bottom">
+                <button class="nav--add--btn" id="add--play">
+                    <img class="add--play--btn" src="./pictures/plus.png" alt="add a game">
+                </button>
+                <p class="nav--btn--text" id="">Add a new game</p>
+            </section>
+            <section class="nav">
+                <button class="nav--btn" id="check--all--play">
+                    0
+                </button>
+                <p class="nav--btn--text" id="">View all games</p>
+            </section>
+            <section class="nav">
+                <button class="nav--btn incomplete" id="check--progress--play">
+                    0
+                </button>
+                <p class="nav--btn--text" id="">View incomplete games</p>
+            </section>
+            <section class="nav">
+                <button class="nav--btn complete" id="check--finish--play">
+                    0
+                </button>
+                <p class="nav--btn--text" id="">View complete games</p>
+            </section>
+        </header>
+        <main class="container--lists--chat">
+            <h1 class="title--app">Welcome to Baby Derfy Manager</h1>
+            <div class="container--list"s>
+                <div class="lists">
+                    <!-- lists -->
+                </div>
+                <div class="container--chat">
+                    <p class="title--chat">Online chat!</p>
+                    <div class="container--chat--pseudo">
+                        <p class="nickname--text">Nickname :</p>
+                        <input type="text" class="input" id="nickname" name="nickname" value="" placeholder="Your nickname">
+                        <div class="container--chat--message">
+                            <p class="chat--pseudo align--left">pseudo</p>
+                            <p class="chat--message align--left">message</p>
+                        </div>
+                        <form class="container--chat--input" action="" method="POST">
+                            <input type="text-area" class="input" id="text_chat" name="message" value="" placeholder="Your message">
+                            <button type="submit" class="validate--btn--chat">
+                                <img class="add--chat--btn" src="./pictures/checked.png" alt="finish a game">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <template id="template-play">
+            <!-- play -->
+                <section class="container--play" play_id="" status="">
+                    <div class="time">
+                    <!-- datetime -->
+                    </div>
+                    <div class="container--all">
+                        <div class="container--play--teams">
+                            <div class="team_A">
+                            <!-- name team_A -->
+                            </div>
+                            <div class="score score_A">
+                            <!-- score team_A -->
+                            </div>
+                            <p class="vs">
+                                VS
+                            </p>
+                            <div class="score score_B">
+                            <!-- score team_B -->
+                            </div>
+                            <div class="team_B">
+                                <!-- name team_B -->
+                            </div>
+                        </div>
+                        <button type="button" class="remove--btn">
+                            <img class="add--play--btn" src="./pictures/remove.png" alt="delete a game">
+                        </button>
+                        <button type="button" class="validate--btn">
+                            <img class="add--play--btn" src="./pictures/checked.png" alt="finish a game">
+                        </button>
+                    </div>
+                </section>
+            <!--/ play -->
+            </template>
 
+            <!-- add play modal -->
+            <div class="modal none" id="addPlayModal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <form action="" method="POST">
+                        <div class="modal-card-head modal-color">
+                            <p class="modal-card-title">Add a game</p>
+                            <button class="modal-cancel-btn close" type="button" aria-label="close"> 
+                                <img class="add--play--btn" src="./pictures/remove.png" alt="close window">
+                            </button>
+                        </div>
+                        <section class="modal-card-body modal-color">
+                            <div class="field">
+                                <label for="team_A" class="label">Name player A</label>
+                                <div class="control">
+                                    <input type="text" class="input" id="team_A" name="team_A" value="" placeholder="Player name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="team_B" class="label">Name player B</label>
+                                <div class="control">
+                                    <input type="text" class="input" id="team_B" name="team_B" value="" placeholder="Player name">
+                                </div>
+                            </div>
+                        </section>
+                        <div class="modal-card-foot modal-color">
+                            <button type="submit" class="button">Let's go!</button>
+                            <button type="button" class="button close" >Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- /add play modal -->
+
+            <!-- finish play modal -->
+            <div class="modal none" id="finishPlayModal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <form action="" method="PATCH" play_id="">
+                        <div class="modal-card-head modal-color">
+                            <p class="modal-card-title">Finish the game</p>
+                            <button class="modal-cancel-btn close" type="button" aria-label="close"> 
+                                <img class="add--play--btn" src="./pictures/remove.png" alt="close window">
+                            </button>
+                        </div>
+                        <section class="modal-card-body">
+                            <div class="field">
+                                <label for="score_A" class="label">Score player A</label>
+                                <div class="control">
+                                    <input type="number" class="input-score" id="score_A" name="score_A" value="0" placeholder="Score player A">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="score_B" class="label">Score player B</label>
+                                <div class="control">
+                                    <input type="number" class="input-score" id="score_B" name="score_B" value="0" placeholder="Score player B">
+                                </div>
+                            </div>
+                        </section>
+                        <div class="modal-card-foot">
+                            <button type="submit" class="button">End play</button>
+                            <button type="button" class="button close" >Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- /finish play modal -->
+        </main>
+    </div>
+    <footer class="footer">
+            <p>Mentions légale</p>
+    </footer>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+    // const socket = io();
+    // socket.on('connect', () => {
+    // console.log('connect');
+    // });
+
+    //send
+    // let counter = 0;
+    // setInterval(() => {
+    // ++counter;
+    // socket.emit('hey', { counter }); 
+    // }, 1000);
+
+    //listen
+    // socket.on('hello', (counter) => {
+    // console.log(`hello - ${counter}`);
+    // });
+    </script>
 </body>
 </html>

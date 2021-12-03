@@ -1,0 +1,318 @@
+body {
+    font-family: 'Outfit', sans-serif;
+}
+
+.container--block {
+    display: flex;
+}
+
+.logo {
+    width: 70%;
+    margin: 2rem 0;
+    border: solid 4px white;
+    border-radius: 50%
+}
+
+.title--app {
+    font-size: 5em;
+    font-weight: bold;
+    color: rgb(255, 145, 0);
+    margin: 2rem;
+}
+
+.container--nav {
+    min-height: 97vh;
+    background-color: black;
+    /* width: 10%; */
+    width: 200px;
+    color: white;
+    text-align: center;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: solid 1px grey;
+    padding-bottom: 1rem;
+    margin: 0 0.8rem 0 
+}
+
+.bottom {
+    margin-bottom: 2rem;
+}
+
+.nav--add--btn {
+    background-color: black;  border: none;
+    margin: 3rem 0 0.5rem 0;
+    cursor: pointer;
+}
+
+.nav--btn {
+    margin: 3rem 0 0.5rem 0;
+    padding: 1rem 1.3rem;
+    cursor: pointer;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.nav--btn:hover {
+    border: solid 4px white;
+    border-radius: 50%
+}
+
+.nav--btn--text {
+    text-align: center;
+}
+
+.add--play--btn {
+    width: 50%;
+}
+
+.add--play--btn:hover {
+    border: solid 4px white;
+    border-radius: 50%
+}
+
+.complete {
+    background-color: rgb(0, 207, 0);
+    color: black;
+}
+
+.incomplete {
+    background-color: rgb(233, 13, 13);
+    color: black;
+}
+
+.container--lists--chat {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.container--list {
+    width: 98%;
+    padding: 2rem 0 0 1rem;
+    display: flex;
+    align-items: baseline;
+}
+
+.container--chat {
+    border-radius: 50px;
+    width: 20%;
+    border: 4px solid  rgb(96, 184, 255);
+    background-color:rgb(196, 196, 196);
+    text-align: center;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem ;
+}
+
+.container--chat--message {
+    background-color: white;
+    min-height: 55vh;
+    border-radius: 10px;
+    margin: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat--pseudo {
+    margin: 0.5rem 0.5rem 0 0.5rem;
+    font-size: 0.7em;
+}
+
+.chat--message {
+    margin: 0 0.5rem 0 0.5rem;
+}
+
+.align--left {
+    align-self: flex-start;
+}
+
+.container--chat--input {
+    display: flex;
+}
+
+.validate--btn--chat {
+    width: 10%;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    background-color:rgb(196, 196, 196);
+}
+
+.add--chat--btn {
+    width: 100%;
+}
+
+.add--chat--btn:hover {
+    border: solid 4px white;
+    border-radius: 50%
+}
+
+.title--chat {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.nickname--text {
+    font-size: 1.2em;
+    margin-top: 1rem;
+}
+
+.lists {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    width: 75%;
+}
+
+/* this is the template */
+.container--all {
+    display: flex;
+    align-items: flex-start
+}
+
+.container--play--teams {
+    display: flex;
+    background: linear-gradient(0.25turn, rgb(131, 117, 255), #ebf8e1, rgb(131, 117, 255));
+    color: white;
+    margin: 1rem 2rem 1rem 1rem;
+    padding: 1rem;
+    justify-content: space-evenly;
+    border-radius: 50px;
+    font-weight: bold;
+    width: 70%;
+}
+
+.time {
+    margin-left: 2rem;
+    font-size: 1.3em;
+}
+
+.team_A {
+    margin: 1rem;
+    font-size: 1.6em;
+}
+
+.team_B {
+    margin: 1rem;
+    font-size: 1.6em;
+}
+
+.score {
+    color: black;
+    font-size: 2em;
+    align-self: center;
+}
+
+.vs {
+    font-size: 2em;
+    background-color: black;
+    padding: 1rem;
+    border-radius: 50%;
+}
+
+.validate--btn {
+    width: 10%;
+    background-color: white;
+    border: none;
+    margin-top: 2rem;
+    cursor: pointer;
+}
+
+.remove--btn {
+    width: 10%;
+    background-color: white;
+    border: none;
+    margin-top: 2rem;
+    cursor: pointer;
+}
+
+.active {
+    display: hidden;
+}
+
+.none {
+    display: none;
+}
+
+.modal {
+    z-index: 2;
+    position: fixed;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    margin: 2rem;
+    padding: 4rem;
+    width: 40%;
+    border-radius: 15px;
+    background-color: rgb(150, 112, 255);
+    box-shadow:  0px 0px 8px  rgba(0, 0, 0, 0.562);
+    font-size: 1.5em;
+}
+
+.modal-card-head {
+    display: flex;
+}
+
+.modal-card-body {
+    display: flex;
+}
+
+.modal-cancel-btn {
+    width: 10%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.modal-card-title {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 80%;
+}
+
+
+.field {
+    margin: 1rem 1rem 1rem 0;
+}
+
+.input {
+    border: 1px solid black;
+    background-color:white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+    width: 85%;
+}
+
+.input-score {
+    border: 1px solid black;
+    background-color:white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+    width: 25%;
+    font-weight: bold;
+}
+
+.button {
+    background-color:white;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-right: 1rem;
+}
+
+.footer {
+    width: 100%;
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 1rem 0;
+}
