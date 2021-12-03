@@ -170,7 +170,6 @@ const app = {
     },
 
     makePlayInDOM: function (list) {
-        console.log(app.filter)
         const playTemplate = document.getElementById('template-play');
         const playTemplateContent = playTemplate.content;
         const newPlay = document.importNode(playTemplateContent, true);
@@ -235,9 +234,9 @@ const app = {
         });
         
         if(app.filter === 'progress' && list.status === true){
-            console.log('progress')
+            //do nothing
         } else if(app.filter === 'finish' && list.status === false) {
-            console.log('finish')
+            //do nothing
         } else {
             playContainer.append(newPlay);
         }

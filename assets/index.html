@@ -42,14 +42,22 @@
                 <p class="nav--btn--text" id="">View complete games</p>
             </section>
         </header>
-        <main class="container--lists">
+        <main class="container--lists--chat">
             <h1 class="title--app">Welcome to Baby Derfy Manager</h1>
-            <div class="lists">
-                <!-- lists -->
+            <div class="container--list"s>
+                <div class="lists">
+                    <!-- lists -->
+                </div>
+                <div class="container--chat">
+                    <p class="title--chat">Online chat!</p>
+                    <div class="container--chat--pseudo">
+                        X
+                    </div>
+                </div>
             </div>
             <template id="template-play">
             <!-- play -->
-                <div class="container--play" play_id="" status="">
+                <section class="container--play" play_id="" status="">
                     <div class="time">
                     <!-- datetime -->
                     </div>
@@ -78,7 +86,7 @@
                             <img class="add--play--btn" src="./pictures/checked.png" alt="finish a game">
                         </button>
                     </div>
-                </div>
+                </section>
             <!--/ play -->
             </template>
 
@@ -89,7 +97,9 @@
                     <form action="" method="POST">
                         <div class="modal-card-head modal-color">
                             <p class="modal-card-title">Add a game</p>
-                            <button class="delete close" type="button" aria-label="close"></button>
+                            <button class="modal-cancel-btn close" type="button" aria-label="close"> 
+                                <img class="add--play--btn" src="./pictures/remove.png" alt="close window">
+                            </button>
                         </div>
                         <section class="modal-card-body modal-color">
                             <div class="field">
@@ -106,8 +116,8 @@
                             </div>
                         </section>
                         <div class="modal-card-foot modal-color">
-                            <button type="submit" class="button is-success">Let's go!</button>
-                            <button class="button close" type="button">Cancel</button>
+                            <button type="submit" class="button">Let's go!</button>
+                            <button type="button" class="button close" >Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -120,26 +130,28 @@
                 <div class="modal-card">
                     <form action="" method="PATCH" play_id="">
                         <div class="modal-card-head modal-color">
-                            <p class="modal-card-title">finish a game</p>
-                            <button class="delete close" type="button" aria-label="close"></button>
+                            <p class="modal-card-title">Finish the game</p>
+                            <button class="modal-cancel-btn close" type="button" aria-label="close"> 
+                                <img class="add--play--btn" src="./pictures/remove.png" alt="close window">
+                            </button>
                         </div>
-                        <section class="modal-card-body modal-color">
+                        <section class="modal-card-body">
                             <div class="field">
                                 <label for="score_A" class="label">Score player A</label>
                                 <div class="control">
-                                    <input type="number" class="input-score" id="score_A" name="score_A" value="" placeholder="Score player A">
+                                    <input type="number" class="input-score" id="score_A" name="score_A" value="0" placeholder="Score player A">
                                 </div>
                             </div>
                             <div class="field">
-                                <label for="score_B" class="label">Score player A</label>
+                                <label for="score_B" class="label">Score player B</label>
                                 <div class="control">
-                                    <input type="number" class="input-score" id="score_B" name="score_B" value="" placeholder="Score player B">
+                                    <input type="number" class="input-score" id="score_B" name="score_B" value="0" placeholder="Score player B">
                                 </div>
                             </div>
                         </section>
-                        <div class="modal-card-foot modal-color">
-                            <button type="submit" class="button is-success">End play</button>
-                            <button class="button close" type="button">Cancel</button>
+                        <div class="modal-card-foot">
+                            <button type="submit" class="button">End play</button>
+                            <button type="button" class="button close" >Cancel</button>
                         </div>
                     </form>
                 </div>
