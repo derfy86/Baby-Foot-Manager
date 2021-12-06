@@ -70,7 +70,7 @@ const app = {
             await app.finishPlay(event, id);
             for (const input of inputScore) {
                 input.value = "";
-            }
+            }   
             app.hideModals();
         });
 
@@ -80,7 +80,7 @@ const app = {
             event.preventDefault();
             if(inputChatForm.value !== "") {
                 app.sendMessageForm(inputChatForm.value);
-                inputChatForm.value = "";
+                inputChatForm.value = "";no
             }
         })
     },
@@ -238,7 +238,7 @@ const app = {
         const date = rawDate[2] + '-' + rawDate[1] + '-' + rawDate[0];
         const rawHour = separateDateAndHour[1].split(':');
         const hour = rawHour[0] + ':' + rawHour[1];
-        const parsedTime = "Play begin the " + date + " at " + hour;
+        const parsedTime = "Play began the " + date + " at " + hour;
 
         const time = newPlay.querySelector('.time');
         time.textContent = parsedTime
