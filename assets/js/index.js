@@ -10,17 +10,21 @@ const app = {
         const socket = io();
 
         socket.on('connect', () => {
+            // init socket
             console.log('connect');
         });
         
         socket.on("data", (message) => {
             //destroy all the plays and rebuild
-            console.log(message);
             const allPlay = document.querySelectorAll('.container--play');
             for (const play of allPlay){
                 play.remove();
             }
             app.getPlayFromAPI();
+        });
+
+        socket.on("send_message", (message) => {
+            app.buildMessage(message)
         });
 
         app.addListenerToActions();
@@ -66,9 +70,19 @@ const app = {
             await app.finishPlay(event, id);
             for (const input of inputScore) {
                 input.value = "";
-            }
+            }   
             app.hideModals();
         });
+
+        const chatForm = document.querySelector('.container--chat--input');
+        const inputChatForm = document.getElementById('text_chat');
+        chatForm.addEventListener('submit', async function(event){
+            event.preventDefault();
+            if(inputChatForm.value !== "") {
+                app.sendMessageForm(inputChatForm.value);
+                inputChatForm.value = "";
+            }
+        })
     },
 
     filterByAll: function () {
@@ -111,6 +125,7 @@ const app = {
             }
 
             const lists = await response.json();
+            if (lists.length > 0) {
             for (const list of lists) {
                 app.makePlayInDOM(list);
             }
@@ -125,6 +140,7 @@ const app = {
             finishPlayNumber.textContent = counterFinishPlay
             const progressPlayNumber = document.getElementById('check--progress--play');
             progressPlayNumber.textContent = counterProgressPlay
+            }
 
         } catch (error) {
             alert(app.defaultErrorMessage);
@@ -161,6 +177,45 @@ const app = {
         }
     },
 
+    sendMessageForm: function (inputMessage) {
+        try {
+            const nicknameElement = document.getElementById('nickname');
+            let nickname = nicknameElement.value;
+            if(nickname === "") {
+                nickname = "Anonymous"
+            };
+            const socket = io();
+            socket.emit('send_message', {nickname, inputMessage}); 
+
+        } catch (error) {
+          alert(app.defaultErrorMessage);
+          console.error(error);
+        }
+    },
+
+    buildMessage: function (message) {
+        try {
+
+            const nicknameElement = document.getElementById('nickname');
+
+            const myNickname = document.createElement("p");
+            myNickname.textContent = message.nickname;
+            nicknameElement.value === message.nickname ? myNickname.classList.add('align--left', 'chat--pseudo') : myNickname.classList.add('align--right', 'chat--pseudo');
+
+            const showMyMessage = document.createElement("p");
+            showMyMessage.textContent = message.inputMessage;
+            nicknameElement.value === message.nickname ? showMyMessage.classList.add('align--left', 'chat--message') : showMyMessage.classList.add('align--right', 'chat--message');
+
+            const container = document.querySelector('.container--chat--message');
+            container.append(myNickname);
+            container.append(showMyMessage);
+
+        } catch (error) {
+          alert(app.defaultErrorMessage);
+          console.error(error);
+        }
+    },
+
     hideModals: function () {
         const modals = document.querySelectorAll('.modal');
         for (const modal of modals) {
@@ -185,7 +240,7 @@ const app = {
         const date = rawDate[2] + '-' + rawDate[1] + '-' + rawDate[0];
         const rawHour = separateDateAndHour[1].split(':');
         const hour = rawHour[0] + ':' + rawHour[1];
-        const parsedTime = "Play begin the " + date + " at " + hour;
+        const parsedTime = "Play began the " + date + " at " + hour;
 
         const time = newPlay.querySelector('.time');
         time.textContent = parsedTime

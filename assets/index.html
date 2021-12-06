@@ -12,9 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <!-- script JS -->
     <script src="./js/index.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
     <div class="container--block">
+
         <header class="container--nav">
             <img class="logo" src="./pictures/logo.png" alt="Logo welcome">
             <section class="nav bottom">
@@ -42,7 +44,9 @@
                 <p class="nav--btn--text" id="">View complete games</p>
             </section>
         </header>
+
         <main class="container--lists--chat">
+
             <h1 class="title--app">Welcome to Baby Derfy Manager</h1>
             <div class="container--list"s>
                 <div class="lists">
@@ -54,10 +58,9 @@
                         <p class="nickname--text">Nickname :</p>
                         <input type="text" class="input" id="nickname" name="nickname" value="" placeholder="Your nickname">
                         <div class="container--chat--message">
-                            <p class="chat--pseudo align--left">pseudo</p>
-                            <p class="chat--message align--left">message</p>
+                            <!-- chat message -->
                         </div>
-                        <form class="container--chat--input" action="" method="POST">
+                        <form class="container--chat--input" action="">
                             <input type="text-area" class="input" id="text_chat" name="message" value="" placeholder="Your message">
                             <button type="submit" class="validate--btn--chat">
                                 <img class="add--chat--btn" src="./pictures/checked.png" alt="finish a game">
@@ -66,6 +69,7 @@
                     </div>
                 </div>
             </div>
+
             <template id="template-play">
             <!-- play -->
                 <section class="container--play" play_id="" status="">
@@ -161,36 +165,20 @@
                             </div>
                         </section>
                         <div class="modal-card-foot">
-                            <button type="submit" class="button">End play</button>
+                            <button type="submit" class="button">End game</button>
                             <button type="button" class="button close" >Cancel</button>
                         </div>
                     </form>
                 </div>
             </div>
             <!-- /finish play modal -->
+
         </main>
     </div>
+
     <footer class="footer">
-            <p>Mentions légale</p>
+            <a href="">Légals mentions</a>
     </footer>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-    // const socket = io();
-    // socket.on('connect', () => {
-    // console.log('connect');
-    // });
 
-    //send
-    // let counter = 0;
-    // setInterval(() => {
-    // ++counter;
-    // socket.emit('hey', { counter }); 
-    // }, 1000);
-
-    //listen
-    // socket.on('hello', (counter) => {
-    // console.log(`hello - ${counter}`);
-    // });
-    </script>
 </body>
 </html>

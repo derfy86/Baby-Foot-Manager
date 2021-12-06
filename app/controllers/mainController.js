@@ -1,5 +1,4 @@
 const dataMapper = require('../dataMapper.js');
-const index = require('../../index.js');
 
 const mainController = {
 
@@ -95,8 +94,6 @@ const mainController = {
 
     },
 
-
 };
-
 
 module.exports = mainController;
