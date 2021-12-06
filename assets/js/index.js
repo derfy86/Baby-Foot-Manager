@@ -80,7 +80,7 @@ const app = {
             event.preventDefault();
             if(inputChatForm.value !== "") {
                 app.sendMessageForm(inputChatForm.value);
-                inputChatForm.value = "";no
+                inputChatForm.value = "";
             }
         })
     },
@@ -125,6 +125,7 @@ const app = {
             }
 
             const lists = await response.json();
+            if (lists.length > 0) {
             for (const list of lists) {
                 app.makePlayInDOM(list);
             }
@@ -139,6 +140,7 @@ const app = {
             finishPlayNumber.textContent = counterFinishPlay
             const progressPlayNumber = document.getElementById('check--progress--play');
             progressPlayNumber.textContent = counterProgressPlay
+            }
 
         } catch (error) {
             alert(app.defaultErrorMessage);
@@ -175,7 +177,7 @@ const app = {
         }
     },
 
-    sendMessageForm: async function (inputMessage) {
+    sendMessageForm: function (inputMessage) {
         try {
             const nicknameElement = document.getElementById('nickname');
             let nickname = nicknameElement.value;
@@ -191,7 +193,7 @@ const app = {
         }
     },
 
-    buildMessage: async function (message) {
+    buildMessage: function (message) {
         try {
 
             const nicknameElement = document.getElementById('nickname');

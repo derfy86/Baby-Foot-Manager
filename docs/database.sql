@@ -3,7 +3,7 @@ BEGIN;
 DROP TABLE IF EXISTS "play";
 
 --
--- status = true -- if the play is finish
+-- status = true -- if the game is finish
 -- 
 
 CREATE TABLE "play" (

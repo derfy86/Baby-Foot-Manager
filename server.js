@@ -44,5 +44,3 @@ app.use('/api', router);
 server.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
 });
-
-// exports.emit = emit;
