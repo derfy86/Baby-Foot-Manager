@@ -115,10 +115,13 @@ body {
 .container--chat--message {
     background-color: white;
     min-height: 55vh;
+    max-height: 55vh;
     border-radius: 10px;
     margin: 0 0.5rem;
     display: flex;
     flex-direction: column;
+    word-wrap: break-word;
+    overflow: auto;
 }
 
 .chat--pseudo {

@@ -229,6 +229,7 @@ const app = {
             const container = document.querySelector('.container--chat--message');
             container.append(myNickname);
             container.append(showMyMessage);
+            container.scrollTop = container.scrollHeight + 10000;
 
         } catch (error) {
           alert(app.defaultErrorMessage);
