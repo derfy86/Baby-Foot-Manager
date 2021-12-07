@@ -1,3 +1,6 @@
+/*
+ * Every path api actions
+ */
 const express = require('express');
 const router = express.Router();
 

@@ -26,10 +26,10 @@ const mainController = {
         try{
             const id = req.params.id;
             if (isNaN(id)) {
+                next()
                 return response.status(400).json({
                     error: `the provided id must be a number`
                 });
-                next();
             }
             dataMapper.deletePlay(id, (err, results) => {
                 if (err) {
@@ -57,7 +57,6 @@ const mainController = {
                     next();
                     return;
                 }
-                // index.emit();
                 return res.status(200).json(results.rows)
             });
         } catch(error) {

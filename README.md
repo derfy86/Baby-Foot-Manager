@@ -114,6 +114,6 @@ Vous pouvez également filtrer les parties en cliquant sur les boutons de la nav
 Ces boutons vous indiquent le nombre de parties par rapport au filtre.  
 Le bouton blanc vous affiche toutes les parties (en cours et terminées), le bouton rouge vous affiche les parties non terminées, enfin le bouton vert vous affiche les parties terminées.  
 Le chat est ouvert à tous et commun à tous les utilisateurs.  
-Pour une bonne utilisation n'oubliez pas de renseigner votre pseudo, vous verrez ainsi vous messages à gauche et les messages des autres utilisateurs à droite. Lorsqu'un utilisateur ne renseigne pas de pseudo il est alors nommé "Anonymous".  
+Pour une bonne utilisation n'oubliez pas de renseigner votre pseudo, vous verrez ainsi vous messages à gauche et les messages des autres utilisateurs à droite. Lorsqu'un utilisateur ne renseigne pas de pseudo il est alors nommé "Anonymous" et son message appraît automatiquement à droite.  
 
 ## Enjoy xD
