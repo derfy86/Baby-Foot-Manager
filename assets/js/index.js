@@ -1,10 +1,16 @@
 const app = {
 
+    // url for fetch function, this will be change with the distant server
     base_url: 'http://localhost:3000',
+
+    // appear into the browser when a problem is encountered
     defaultErrorMessage: 'Désolé un problème est survenu, veuillez réessayer ultérieurement',
+
+    // start with no filter
     filter: 'all',
 
 
+    // inition when application is started
     init: function () {
         console.log('app.init !');
         const socket = io();
@@ -15,7 +21,7 @@ const app = {
         });
         
         socket.on("data", (message) => {
-            //destroy all the plays and rebuild
+            // after change in database we destroy all the plays and rebuild
             const allPlay = document.querySelectorAll('.container--play');
             for (const play of allPlay){
                 play.remove();
@@ -24,6 +30,7 @@ const app = {
         });
 
         socket.on("send_message", (message) => {
+            // chat message
             app.buildMessage(message)
         });
 
@@ -31,6 +38,7 @@ const app = {
         app.getPlayFromAPI();
     },
 
+    // all buttons listener
     addListenerToActions: function () {
         const addPlay = document.getElementById('add--play');
         addPlay.addEventListener('click', function(){
@@ -85,6 +93,7 @@ const app = {
         })
     },
 
+    // back with no filter
     filterByAll: function () {
         app.filter = 'all'
         const allPlays = document.querySelectorAll('.container--play');
@@ -95,6 +104,7 @@ const app = {
         socket.emit('data', 'change in database'); 
     },
 
+    // show only the games in progress
     filterByProgress: function () {
         app.filter = 'progress'
         const allPlays = document.querySelectorAll('.container--play');
@@ -105,6 +115,7 @@ const app = {
         socket.emit('data', 'change in database'); 
     },
 
+    // show only the games finished
     filterByFinish: function () {
         app.filter = 'finish'
         const allPlays = document.querySelectorAll('.container--play');
@@ -115,6 +126,7 @@ const app = {
         socket.emit('data', 'change in database'); 
     },
 
+    // go take every games in database
     getPlayFromAPI: async function () {
         try {
             const response = await fetch(app.base_url + '/api/');
@@ -125,21 +137,23 @@ const app = {
             }
 
             const lists = await response.json();
+
+            // if lists does not exist we are doing nothing to escape the error
             if (lists.length > 0) {
-            for (const list of lists) {
-                app.makePlayInDOM(list);
-            }
+                for (const list of lists) {
+                    app.makePlayInDOM(list);
+                }
 
-            const counterAllPlay = lists[lists.length -1].count_all;
-            const counterFinishPlay = lists[lists.length -1].count_finish;
-            const counterProgressPlay = lists[lists.length -1].count_progress;
+                const counterAllPlay = lists[lists.length -1].count_all;
+                const counterFinishPlay = lists[lists.length -1].count_finish;
+                const counterProgressPlay = lists[lists.length -1].count_progress;
 
-            const allPlayNumber = document.getElementById('check--all--play');
-            allPlayNumber.textContent = counterAllPlay
-            const finishPlayNumber = document.getElementById('check--finish--play');
-            finishPlayNumber.textContent = counterFinishPlay
-            const progressPlayNumber = document.getElementById('check--progress--play');
-            progressPlayNumber.textContent = counterProgressPlay
+                const allPlayNumber = document.getElementById('check--all--play');
+                allPlayNumber.textContent = counterAllPlay
+                const finishPlayNumber = document.getElementById('check--finish--play');
+                finishPlayNumber.textContent = counterFinishPlay
+                const progressPlayNumber = document.getElementById('check--progress--play');
+                progressPlayNumber.textContent = counterProgressPlay
             }
 
         } catch (error) {
@@ -148,12 +162,14 @@ const app = {
         }
     },
     
+    // show the modal when add game is clicked
     showAddPlayModal: function () {
         const addPlayModal = document.getElementById('addPlayModal');
         addPlayModal.classList.remove('none');
         addPlayModal.classList.add('active');
     },
     
+    // post the form modal to add a game in database
     addPlayForm: async function (event) {
         try {
             const formData = new FormData(event.target);
@@ -169,6 +185,7 @@ const app = {
 
             const list = await response.json();
             const socket = io();
+            // we send a message to the server that a change was made
             socket.emit('data', 'change in database'); 
             app.makePlayInDOM(list[0]);
         } catch (error) {
@@ -176,7 +193,8 @@ const app = {
           console.error(error);
         }
     },
-
+    
+    // check the nickname and send the message to the chat
     sendMessageForm: function (inputMessage) {
         try {
             const nicknameElement = document.getElementById('nickname');
@@ -193,6 +211,7 @@ const app = {
         }
     },
 
+    // create the message into the chat
     buildMessage: function (message) {
         try {
 
@@ -204,6 +223,7 @@ const app = {
 
             const showMyMessage = document.createElement("p");
             showMyMessage.textContent = message.inputMessage;
+            // if the message is not from us, we place it in right
             nicknameElement.value === message.nickname ? showMyMessage.classList.add('align--left', 'chat--message') : showMyMessage.classList.add('align--right', 'chat--message');
 
             const container = document.querySelector('.container--chat--message');
@@ -216,6 +236,7 @@ const app = {
         }
     },
 
+    // to disappear all modals
     hideModals: function () {
         const modals = document.querySelectorAll('.modal');
         for (const modal of modals) {
@@ -224,6 +245,7 @@ const app = {
         }
     },
 
+    // build a game into the application by the template html 
     makePlayInDOM: function (list) {
         const playTemplate = document.getElementById('template-play');
         const playTemplateContent = playTemplate.content;
@@ -232,19 +254,16 @@ const app = {
         const playId = newPlay.querySelector('[play_id]');
         playId.setAttribute('play_id', list.id)
 
+        // if status = true, the game is finish
         const status = newPlay.querySelector('[status]');
         status.setAttribute('status', list.status)
    
-        const separateDateAndHour = list.created_at.split('T');
-        const rawDate = separateDateAndHour[0].split('-');
-        const date = rawDate[2] + '-' + rawDate[1] + '-' + rawDate[0];
-        const rawHour = separateDateAndHour[1].split(':');
-        const hour = rawHour[0] + ':' + rawHour[1];
-        const parsedTime = "Play began the " + date + " at " + hour;
-
+        // we convert the created_at by French format
+        const parsedTime = app.parseData(list.created_at);
         const time = newPlay.querySelector('.time');
         time.textContent = parsedTime
 
+        // we name "Unknnow" every player with no name
         if(list.team_A === ""){
             list.team_A = "Unknown"
         }
@@ -265,6 +284,7 @@ const app = {
 
         const playContainer = document.querySelector('.lists');
 
+        // we color the game by status and score, bleu in progress, grey null match, red looser and green winner
         if (list.status === true) {
             const validateBtn = newPlay.querySelector('.validate--btn');
             validateBtn.style.display = 'none';
@@ -288,6 +308,7 @@ const app = {
             app.showfinishPlayModal(list.id)
         });
         
+        // filters
         if(app.filter === 'progress' && list.status === true){
             //do nothing
         } else if(app.filter === 'finish' && list.status === false) {
@@ -299,6 +320,18 @@ const app = {
         
     },
 
+    // parse the created_at to French format
+    parseData: function (created_at) {
+        const separateDateAndHour = created_at.split('T');
+        const rawDate = separateDateAndHour[0].split('-');
+        const date = rawDate[2] + '-' + rawDate[1] + '-' + rawDate[0];
+        const rawHour = separateDateAndHour[1].split(':');
+        const hour = rawHour[0] + ':' + rawHour[1];
+        const parsedTime = "Play began the " + date + " at " + hour;
+        return parsedTime;
+    },
+
+    // show the modal for finish a game
     showfinishPlayModal: function (id) {
         const finishPlayModal = document.getElementById('finishPlayModal');
         const finishForm = document.querySelector('#finishPlayModal form');
@@ -307,6 +340,7 @@ const app = {
         finishPlayModal.classList.add('active');
     },
 
+    // when game trash button is clicked
     deletePlay: async function (event){
         const currentPlay = event.target.closest('[play_id]');
         const id = currentPlay.getAttribute("play_id");
@@ -316,8 +350,9 @@ const app = {
                 method: 'DELETE',
             });
         
-            currentPlay.remove();
+            // here we dont need "currentPlay.remove();" because all games will be restarted
             const socket = io();
+            // we send a message to the server that a change was made
             socket.emit('data', 'change in database'); 
             
             if (response.status !== 200) {
@@ -330,6 +365,7 @@ const app = {
         }
     },
 
+    // after finished modal, we change the current game in database
     finishPlay: async function (event, id) {
 
         try {
@@ -343,7 +379,7 @@ const app = {
                     currentPlay = play;
                 }
             }
-            currentPlay.remove();
+            // here we dont need "currentPlay.remove();" because all games will be restarted
         
             const response = await fetch(app.base_url + '/api/finish', {
                 method: 'PATCH',
@@ -358,6 +394,7 @@ const app = {
             app.makePlayInDOM(list[0])
 
             const socket = io();
+            // we send a message to the server that a change was made
             socket.emit('data', 'change in database'); 
             
         } catch (error) {
@@ -368,5 +405,6 @@ const app = {
 
 };
 
-
+// load everything befor stating
 document.addEventListener('DOMContentLoaded', app.init);
+

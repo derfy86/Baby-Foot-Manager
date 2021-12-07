@@ -23,7 +23,6 @@ app.use(express.static('assets'));
 /*
  * Socket.io
  */
-//send
 io.on('connection', (socket) => {
   socket.on('send_message', (message) => {
       io.emit('send_message', message);
